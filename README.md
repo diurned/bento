@@ -25,14 +25,13 @@ Bent0 is a hacking environment manager written in Rust that supports containers 
 
 ## Roadmap
 
+- [x] images
+  - [x] pull
+  - [x] remove
 - [ ] containers
-  - [ ] pull images
-  - [ ] remove images
   - [ ] create containers
   - [ ] remove containers
 - [ ] microvms
-  - [ ] pull images
-  - [ ] remove images
   - [ ] create microvm
   - [ ] remove microvm
 
