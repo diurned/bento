@@ -43,4 +43,12 @@ pub enum Commands {
         #[clap(name = "image")]
         img: image::Image,
     },
+
+    /// Container relative commands
+    #[clap(alias = "c")]
+    Container {
+        /// Retrieve CRI version
+        #[arg(name = "version", long = "version", short = 'v')]
+        version: bool,
+    },
 }
