@@ -56,6 +56,29 @@ pub fn pull(image: Image) {
     }
 }
 
+pub fn list_image() {
+    container::list::image();
+
+    let entries = fs::read_dir(
+        path::PathBuf::from(env!("HOME"))
+            .join(".bento")
+            .join("images"),
+    )
+    .expect("failed to read .bento/images directory");
+
+    for entry in entries {
+        match entry {
+            Ok(entry) => {
+                let name = entry.file_name();
+                println!("{}", name.to_string_lossy());
+            }
+            Err(e) => {
+                eprintln!("Error reading entry: {}", e);
+            }
+        }
+    }
+}
+
 pub fn remove(image: Image) {
     let url = match image {
         Image::Kali => "docker.io/kalilinux/kali-rolling:latest",

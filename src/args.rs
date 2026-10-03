@@ -44,6 +44,10 @@ pub enum Commands {
         img: image::Image,
     },
 
+    /// List images
+    #[clap(name = "images", alias = "i")]
+    Images {},
+
     /// Container relative commands
     #[clap(alias = "c")]
     Container {

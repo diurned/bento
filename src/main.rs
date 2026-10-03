@@ -13,6 +13,7 @@ fn main() {
     match argv.cmd {
         args::Commands::Pull { img } => image::pull(img),
         args::Commands::Remove { img } => image::remove(img),
+        args::Commands::Images {} => image::list_image(),
         args::Commands::Container { version: _ } => container::version::version(),
     };
 }
