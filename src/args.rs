@@ -55,4 +55,7 @@ pub enum Commands {
         #[arg(name = "version", long = "version", short = 'v')]
         version: bool,
     },
+
+    /// List containers
+    Ps {},
 }

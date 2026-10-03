@@ -1,4 +1,5 @@
 use client::{
+    services::v1::{ListContainersRequest, containers_client::ContainersClient},
     services::v1::{ListImagesRequest, images_client::ImagesClient},
     tonic::Request,
     with_namespace,
@@ -23,4 +24,16 @@ pub async fn image() {
     }
 }
 
-// pub fn container() {}
+#[tokio::main(flavor = "current_thread")]
+pub async fn container() {
+    let channel = client::connect("/run/containerd/containerd.sock")
+        .await
+        .expect("Connect failed");
+
+    let mut client = ContainersClient::new(channel);
+    let request = with_namespace!(ListContainersRequest { filters: vec![] }, NAMESPACE);
+    let response = client.list(request).await.expect("Failed to list images");
+
+    println!("CONTAINERS");
+    println!("{:?}", response);
+}
