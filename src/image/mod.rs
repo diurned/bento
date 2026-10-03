@@ -29,7 +29,6 @@ pub fn pull(image: Image) {
 
     if discriminant <= 0x2 {
         container::pull::pull(url);
-        process::exit(0);
     } else {
         let filename = url
             .split("/")
@@ -91,8 +90,7 @@ pub fn remove(image: Image) {
     let discriminant = image as u8;
 
     if discriminant <= 0x2 {
-        // TODO: Make the remove function.
-        process::exit(1);
+        container::remove::remove(url);
     } else {
         let filename = url
             .split("/")
