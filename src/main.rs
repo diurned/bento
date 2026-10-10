@@ -16,5 +16,6 @@ fn main() {
         args::Commands::Images {} => image::list_image(),
         args::Commands::Container { version: _ } => container::version::version(),
         args::Commands::Ps {} => container::list::container(),
+        args::Commands::Run { name, img } => container::create::start(name, img),
     };
 }

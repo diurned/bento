@@ -58,4 +58,15 @@ pub enum Commands {
 
     /// List containers
     Ps {},
+
+    /// Create and run a new container from an image
+    Run {
+        /// Container name
+        #[clap(name = "name")]
+        name: String,
+
+        /// Image to run
+        #[clap(name = "image")]
+        img: image::Image,
+    },
 }
