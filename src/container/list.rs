@@ -1,6 +1,8 @@
 use client::{
-    services::v1::{ListContainersRequest, containers_client::ContainersClient},
-    services::v1::{ListImagesRequest, images_client::ImagesClient},
+    services::v1::{
+        ListContainersRequest, ListImagesRequest, containers_client::ContainersClient,
+        images_client::ImagesClient,
+    },
     tonic::Request,
     with_namespace,
 };
@@ -35,5 +37,7 @@ pub async fn container() {
     let response = client.list(request).await.expect("Failed to list images");
 
     println!("CONTAINERS");
-    println!("{:?}", response);
+    for container in response.into_inner().containers {
+        println!("{:?}", container);
+    }
 }
