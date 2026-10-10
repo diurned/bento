@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function check_deps() {
-    deps=("curl" "tar")
+    deps=("curl" "tar" "cargo")
     missing=()
 
     for dep in "${deps[@]}"; do
@@ -58,6 +58,10 @@ function remove_containerd() {
     rm /usr/local/lib/systemd/system/containerd.service
 }
 
+function install_bento() {
+    cargo install --git https://github.com/diurned/bento/
+}
+
 function main() {
     check_deps
 
@@ -67,6 +71,7 @@ function main() {
     fi
 
     install_containerd
+    install_bento
 }
 
 main
