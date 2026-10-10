@@ -69,4 +69,12 @@ pub enum Commands {
         #[clap(name = "image")]
         img: image::Image,
     },
+
+    /// Delete a container by its ID
+    #[clap(alias = "del")]
+    Delete {
+        /// Container ID to delete
+        #[clap(name = "cid")]
+        cid: String,
+    },
 }
