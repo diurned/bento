@@ -16,15 +16,20 @@ pub enum Image {
     ParrotVM = 0x4,
 }
 
-pub fn pull(image: Image) {
-    let url = match image {
-        Image::Kali => "docker.io/kalilinux/kali-rolling:latest",
-        Image::Parrot => "docker.io/parrotsec/security:latest",
-        Image::Exegol => "docker.io/nwodtuhs/exegol:full-3.1.6",
-        Image::KaliVM => "https://cdimage.kali.org/kali-2026.2/kali-linux-2026.2-qemu-amd64.7z",
-        Image::ParrotVM => "https://deb.parrot.sh/parrot/iso/7.3/Parrot-home-7.3_amd64.qcow2.zip",
-    };
+impl Image {
+    pub fn as_ref(&self) -> &'static str {
+        match self {
+            Image::Kali => "docker.io/kalilinux/kali-rolling:latest",
+            Image::Parrot => "docker.io/parrotsec/security:latest",
+            Image::Exegol => "docker.io/nwodtuhs/exegol:full-3.1.6",
+            Image::KaliVM => "https://cdimage.kali.org/kali-2026.2/kali-linux-2026.2-qemu-amd64.7z",
+            Image::ParrotVM => "https://deb.parrot.sh/parrot/7.3/Parrot-home-7.3_amd64.qcow2.zip",
+        }
+    }
+}
 
+pub fn pull(image: Image) {
+    let url = &image.as_ref().to_string();
     let discriminant = image as u8;
 
     if discriminant <= 0x2 {
@@ -79,14 +84,7 @@ pub fn list_image() {
 }
 
 pub fn remove(image: Image) {
-    let url = match image {
-        Image::Kali => "docker.io/kalilinux/kali-rolling:latest",
-        Image::Parrot => "docker.io/parrotsec/security:latest",
-        Image::Exegol => "docker.io/nwodtuhs/exegol:full-3.1.6",
-        Image::KaliVM => "https://cdimage.kali.org/kali-2026.2/kali-linux-2026.2-qemu-amd64.7z",
-        Image::ParrotVM => "https://deb.parrot.sh/parrot/iso/7.3/Parrot-home-7.3_amd64.qcow2.zip",
-    };
-
+    let url = &image.as_ref().to_string();
     let discriminant = image as u8;
 
     if discriminant <= 0x2 {
